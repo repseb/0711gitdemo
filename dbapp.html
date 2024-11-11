@@ -1,0 +1,30 @@
+DBApp<br>
+<input type = "text" id="invoer" placeholder = "naam"><button onclick = "eenfunctie()">Klik hier</button>
+<button onclick="toon_alle_producten()">alle producten</button><br>
+<input type = "text" id="invoer1" placeholder = "naam"><button onclick = "eenfunctie()">Klik hier</button>
+
+<script>
+    function eenfunctie(){
+        let invoer1 = document.getElementById("invoer").value;
+        let invoer2 = document.getElementById("invoer1").value;
+       // alert(invoer1);
+        fetch("http://127.0.0.1:5000/product_toevoegen/" + invoer1 + "/" + invoer2)
+    }
+    function toon_alle_producten(){
+        fetch("http://127.0.0.1:5000/toon_alle_producten")
+        .then( r => r.json() )
+        .then( d => verwerkfunctie(d) )
+    }
+    function verwerkfunctie(alleproducten){
+        console.log(alleproducten);
+        document.getElementById("uitkomst").innerHTML= "";
+        for(let i = 0; i < alleproducten.length; i++){
+            document.getElementById("uitkomst").innerHTML += alleproducten[i].productnaam+"<br>";
+        }
+    }
+</script>
+<div id="uitkomst"></div>
+
+
+
+
